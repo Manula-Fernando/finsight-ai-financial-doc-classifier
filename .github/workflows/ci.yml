@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y tesseract-ocr libgl1 libglib2.0-0
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install fastapi uvicorn
+      - name: Lint (basic)
+        run: |
+          python - <<'PY'
+import compileall, sys
+success = compileall.compile_dir('src', quiet=1)
+sys.exit(0 if success else 1)
+PY
+      - name: Smoke test OCR import
+        run: python -c "from src import ocr; print('OCR backends:', ocr.get_reader())"
+      - name: API health check
+        run: |
+          uvicorn api.main:app --port 8001 &
+          pid=$!
+          sleep 5
+          curl -f http://127.0.0.1:8001/health
+          kill $pid

@@ -1,0 +1,35 @@
+# core
+numpy
+pandas
+scikit-learn
+matplotlib
+plotly
+streamlit
+mlflow
+python-dotenv
+
+# vision + ocr
+torch
+torchvision
+pillow
+opencv-python
+albumentations
+easyocr
+pytesseract
+regex
+paddlepaddle==2.6.0; sys_platform == "win32" and platform_machine != "arm64"
+paddleocr
+
+timm
+
+# huggingface datasets (for RVL-CDIP subset)
+datasets
+
+seaborn
+tqdm
+kagglehub
+pymupdf
+
+# optional: fastapi uvicorn (future)
+# fastapi
+# uvicorn

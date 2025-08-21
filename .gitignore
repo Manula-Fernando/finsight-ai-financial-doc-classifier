@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dll
+*.dist-info/
+
+# Environments
+.venv/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data & Artifacts
+/data/raw/**
+/data/processed/**
+/outputs/tmp/**
+/outputs/*.csv
+/mlruns/**
+!/mlruns/.gitkeep
+/models/*.pt
+/models/*.pth
+
+# Logs
+logs/
+*.log
+
+# Caches
+.cache/
+.streamlit/
+**/__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Coverage / test
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
